@@ -24,8 +24,8 @@ a.ts
 autoplot(a.ts)
 
 
-train <- window(a.ts , end=2015)
-test <- window(a.ts, start=2016)
+train <- window(a.ts , end=2018)
+test <- window(a.ts, start=2019)
 
 fit <- ets(train)
 
