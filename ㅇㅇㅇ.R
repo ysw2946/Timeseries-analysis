@@ -1,6 +1,6 @@
 library(tidyverse)
 library(forecast)
-
+library(urca)
 # 데이터 불러오기
 a <- read.csv("C:/Data/출생아 수.csv")
 a <- a[-1,]
@@ -54,3 +54,24 @@ autoplot(test, series="Test data", size=1) +
   autolayer(fc, series="ets", size=1, PI = FALSE) +
   labs(y= NULL, color=NULL)
 
+## ARIMA모델 적합
+
+# 기본자료 차분 계절차분 확인
+ggtsdisplay(a.ts)
+
+#로그변환
+lam <- BoxCox.lambda(a.ts)
+autoplot(BoxCox(a.ts,lam))
+autoplot(BoxCox(a.ts,0))
+
+# 차분확인
+ggtsdisplay(diff(a.ts))
+log(a.ts) %>% diff(lag=12) %>% diff() %>% ggtsdisplay()
+log(a.ts) %>% diff(lag=12) %>% length()
+?diff
+
+ndiffs(a.ts)
+nsdiffs(a.ts)
+
+a.ts %>% ur.kpss() %>% summary()
+a.ts %>% diff(lag=12) %>% nsdiffs()
