@@ -19,3 +19,6 @@ summary(fit2)
 
 fit2_2 <- tslm(train_b ~ trend + season)
 summary(fit2_2)
+
+fit3 <- tslm(train_b ~ time(train_b) + fourier(train_b,K=2))
+summary(fit3)
