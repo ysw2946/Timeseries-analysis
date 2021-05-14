@@ -130,3 +130,10 @@ autoplot(test, series="Test data", size=1) +
   autolayer(fc3, series="ARIMA", size=1, PI = FALSE) +
   labs(y= NULL, color=NULL)
 
+# 2021년 12월까지의 예측
+fc4 <- forecast(fit3,h = 48)
+
+autoplot(birth.ts,PI=FALSE) +
+  autolayer(fc4,PI=F,col="red",size=0.8)
+  labs(x=NULL,y=NULL, color=NULL)
+
