@@ -57,3 +57,9 @@ autoplot(train_aus) +
 autoplot(fc3, include=0) +
   autolayer(test_aus, series = "Test Data", size=1) +
   labs(y=NULL, color=NULL)
+
+
+autoplot(test_aus,series="Test") +
+  autolayer(fc2, series = "ETS(MAM)", size=1,PI=F) +
+  autolayer(fc3, series = "ETS(AAA)", size=1,PI=F) +
+  labs(y=NULL, color=NULL)

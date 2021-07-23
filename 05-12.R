@@ -54,10 +54,9 @@ autoplot(fc4,include=8) +
   theme(legend.position="none") +
   ylab(NULL)
 
-global <- read.table("C:/Data/global.txt")
-global <- global %>% as.list() %>% unlist()
-global.ts <- ts(global, start=c(1970,1),freq=12)
-
+global <- read.table("C:/Data/global.txt",stringsAsFactors = F)
+global <- as.vector(t(global))
+global.ts <- ts(global, start=c(1856,1),freq=12)
 autoplot(global.ts)
 
 temp <- window(global.ts, start=1970)
@@ -71,3 +70,34 @@ fit1 <- tslm(train_g ~ TIME + MONTH)
 summary(fit1)
 
 checkresiduals(fit1)
+
+fit2 <- auto.arima(train_g,xreg=cbind(TIME,MONTH))
+summary(fit2)
+
+checkresiduals(fit2)
+
+Time <- time(train_g)
+res <- vector("numeric",6)
+for(i in seq(res)){
+  xreg <- cbind(Time, fourier(train_g, K=i))
+  fit <- auto.arima(train_g,xreg=xreg)
+  res[i] <- fit$aicc
+}
+
+res
+
+(k_min <- which.min(res))
+
+Time <- time(train_g)
+Fourier <- fourier(train_g,K=k_min)
+fit3 <- auto.arima(train_g, xreg=cbind(Time,Fourier))
+
+checkresiduals(fit3)
+
+fit2$aicc
+fit3$aicc
+
+fit_arima <- auto.arima(train_g)
+fit_arima
+
+checkresiduals(fit_arima)

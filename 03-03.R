@@ -9,14 +9,8 @@ class(AP)
 
 start(AP); end(AP); frequency(AP)
 
-depart <- read.table("C:/Users/ysw29/Downloads/depart.txt", fileEncoding = "UTF-8-BOM")
-depart.v <- data.frame(t(as.vector(t(depart))))
-depart.ts <- ts(depart,start=1984,freq=12)
-depart.ts
-
-
-depart <- scan("C:/Users/ysw29/OneDrive/바탕 화면/시계열 분석/depart.txt",fileEncoding = "UTF-8-BOM")
-depart.ts <- ts(depart, 1984,freq=1)
+depart <- scan("C:/Data/depart.txt",fileEncoding = "UTF-8-BOM")
+depart.ts <- ts(depart, 1984,freq=12)
 depart.ts
 
 #install.packages("ggplot2")
@@ -26,7 +20,7 @@ autoplot(depart.ts) +
   labs(title="Monthly sales of a department store",
        x="Year", y="")
 
-global <- scan("C:/Users/ysw29/OneDrive/바탕 화면/시계열 분석/global.txt",fileEncoding="UTF-8-BOM")
+global <- scan("C:/Data/global.txt",fileEncoding="UTF-8-BOM")
 global.ts <- ts(global, start=1856,freq =12)
 autoplot(global.ts) +
   labs(title="Global Temperature 1985 ~ 2005", x="Year",

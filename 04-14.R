@@ -15,7 +15,6 @@ fit1 <- auto.arima(train_r,d=0, stepwise=FALSE,
                    approximation=FALSE, seasonal=FALSE,
                    trace=TRUE)
 fit1
-confi
 
 fit2 <- auto.arima(train_r, stepwise=FALSE,
                    approximation=FALSE, seasonal=FALSE,

@@ -12,12 +12,6 @@ fourier(train_b,K=2)[1:5,]
 fit3 <- tslm(train_b ~ time(train_b) + fourier(train_b,K=2))
 summary(fit3)
 
-data.frame(data=train_b, fitted=fit1$fitted) %>%
-  ggplot(aes(x=data,y=fitted)) +
-  geom_point(aes(color=factor(cycle(data))), size=2) +
-  geom_abline(intercept=0, slope=1) +
-  labs(color="Quarter", x="Observed data", y="Fitted data")
-
 Time <- time(train_b)
 fit1 <- tslm(train_b ~ Time + seasonaldummy(train_b))
 new1 <- data.frame(Time=time(test_b), seasonaldummy(test_b))
